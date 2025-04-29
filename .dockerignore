@@ -1,0 +1,31 @@
+# Git files
+.git
+.gitignore
+
+# IDE/Editor specific
+.vscode/
+.idea/
+*.iml
+
+# Python cache/artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Log files
+*.log
+
+# Docker files (not needed inside the image)
+Dockerfile*
+docker-compose.yaml

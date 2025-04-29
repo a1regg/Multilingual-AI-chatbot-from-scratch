@@ -1,0 +1,49 @@
+repos:
+  # General-purpose checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace            # remove stray spaces at end of lines
+      - id: end-of-file-fixer              # ensure files end in a single newline
+      - id: check-yaml                     # validate all *.yml and *.yaml syntax
+      - id: check-added-large-files        # prevent accidentally committing huge files
+
+  # Black — uncompromising Python code formatter
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        exclude: ^\.venv/                 # Exclude virtual environment
+
+  # isort — sort Python imports
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]      # use black-compatible sorting
+        exclude: ^\.venv/
+
+  # Flake8 — linter for Python
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        args: ["--max-line-length=88"]    # align with black’s default line length
+        exclude: ^\.venv/
+
+  # Mypy — static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+      - id: mypy
+        args: ["--ignore-missing-imports"] # speed up by skipping untyped deps
+        exclude: ^\.venv/
+
+  # Ruff — fast Python linter & auto‑formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.287
+    hooks:
+      - id: ruff
+        args: ["--fix"]                   # automatically apply fixes
+        exclude: ^\.venv/

@@ -1,0 +1,14 @@
+name: "Scheduled Retrain"
+on:
+  schedule:
+    - cron: "0 2 * * *"  # daily at 02:00 UTC
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python src/training.py

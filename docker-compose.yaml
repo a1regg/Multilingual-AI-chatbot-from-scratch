@@ -1,0 +1,41 @@
+services:
+  mlflow-db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: mlflow
+      POSTGRES_DB: mlflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.mlflow
+    depends_on:
+      - mlflow-db
+    ports:
+      - "${MLFLOW_HOST_PORT}:${MLFLOW_CONTAINER_PORT}"
+    volumes:
+      - ./mlartifacts:/mlartifacts
+    environment:
+      - MLFLOW_PORT=${MLFLOW_CONTAINER_PORT}
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mlflow
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./mlartifacts:/mlartifacts
+    environment:
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI}
+      - MLFLOW_EXPERIMENT_NAME=${MLFLOW_EXPERIMENT_NAME}
+    tty: true
+    stdin_open: true
+
+volumes:
+  postgres_data:

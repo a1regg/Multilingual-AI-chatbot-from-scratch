@@ -1,0 +1,42 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.so
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# MLflow artifacts
+mlartifacts/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Test outputs / caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# IDE / Editor configs
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
