@@ -47,7 +47,7 @@ def build_vocab_for_language(intents, lang_code: str):
 def bag_of_words(tokens, vocab):
     """
     Create a binary Bag‑of‑Words vector.
-    1 if vocab word is present in tokens, else 0. :contentReference[oaicite:0]{index=0}
+    1 if vocab word is present in tokens, else 0.
     """
     return np.array([1 if word in tokens else 0 for word in vocab])
 

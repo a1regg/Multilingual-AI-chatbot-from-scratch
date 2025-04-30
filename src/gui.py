@@ -79,19 +79,16 @@ class ChatGUI(QWidget):
 
 
 def run():
-    # Load intents and vocabularies
     intents = load_intents()
     tag_to_idx = build_tag_index(intents)
 
-    # First get the experiment ID
     experiment_id = config.get_or_create_experiment_id(config.MLFLOW_EXPERIMENT_NAME)
-    # Then get the latest run ID using the experiment ID
     run_id = os.getenv("MLFLOW_RUN_ID") or config.get_latest_run_id(experiment_id)
     if not run_id:
         raise RuntimeError(
             "Could not determine MLflow run ID. "
             "Set MLFLOW_RUN_ID or check your tracking server."
-        )  # explicit failure
+        )
 
     # Load the two models from MLflow
     model_en = mlflow.pytorch.load_model(f"runs:/{run_id}/model_en")

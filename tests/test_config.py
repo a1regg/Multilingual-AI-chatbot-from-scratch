@@ -69,7 +69,7 @@ def test_get_latest_run_id_found(mock_mlflow_client):
     mock_runs = [
         MockRun(expected_run_id),
         MockRun("run_xyz"),
-    ]  # search_runs returns a list
+    ]
     mock_mlflow_client.search_runs.return_value = mock_runs
 
     actual_run_id = config.get_latest_run_id(experiment_id)

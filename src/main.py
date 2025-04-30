@@ -58,9 +58,7 @@ def main():
     vocab_en = build_vocab_for_language(intents, "en")
     vocab_uk = build_vocab_for_language(intents, "uk")
 
-    # 1. Get the Experiment ID using the experiment name
     experiment_id = config.get_or_create_experiment_id(config.MLFLOW_EXPERIMENT_NAME)
-    # 2. Get the latest Run ID using the integer experiment_id
     run_id = config.get_latest_run_id(experiment_id)
 
     model_en, model_uk = load_models(run_id)

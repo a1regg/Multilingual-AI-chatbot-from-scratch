@@ -71,14 +71,13 @@ def main() -> None:
     intents = load_intents()
     tag_to_idx = build_tag_index(intents)
     DATA_DIR = "data"
-    # MLflow config already applied in config.py
+
     with config.start_run(run_name="Bilingual_Models"):
         for lang in ("en", "uk"):
             model, vocab = train_lang(intents, lang, tag_to_idx)
             if model:
                 # Log the PyTorch model
                 mlflow.pytorch.log_model(model, f"model_{lang}")
-
                 # Write and log vocabulary
                 vocab_path = os.path.join(DATA_DIR, f"vocab_{lang}.txt")
                 with open(vocab_path, "w", encoding="utf-8") as vf:

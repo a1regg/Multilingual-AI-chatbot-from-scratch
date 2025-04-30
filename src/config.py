@@ -4,7 +4,7 @@ import mlflow
 from dotenv import load_dotenv
 
 load_dotenv()
-# Read directly from environment - Docker Compose MUST provide this
+
 MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
 MLFLOW_EXPERIMENT_NAME = os.getenv("MLFLOW_EXPERIMENT_NAME", "ChatBot_Experiment")
 
@@ -37,8 +37,8 @@ def get_latest_run_id(experiment_id):
     client = mlflow.tracking.MlflowClient()
     runs = client.search_runs(
         experiment_ids=[experiment_id],
-        order_by=["start_time DESC"],  # Order by start time, descending
-        max_results=1,  # Get only the latest run
+        order_by=["start_time DESC"],
+        max_results=1,
     )
     if not runs:
         raise ValueError(f"No runs found for experiment ID: {experiment_id}")
